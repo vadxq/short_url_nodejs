@@ -1,0 +1,39 @@
+{
+  "name": "short_url_nodejs",
+  "version": "1.0.0",
+  "description": "to short url with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon node index.js",
+    "build": "babel ./src/ -d dist",
+    "start": "node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadxq/short_url_nodejs.git"
+  },
+  "keywords": [
+    "short url",
+    "url"
+  ],
+  "author": "vadxq",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/vadxq/short_url_nodejs/issues"
+  },
+  "homepage": "https://github.com/vadxq/short_url_nodejs#readme",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.4.16"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "nodemon": "^1.19.0"
+  }
+}
