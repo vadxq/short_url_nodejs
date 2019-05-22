@@ -19,8 +19,8 @@ router
     }
     ctx.status = 302
   })
-  .post('/', (ctx, next) => {
-    let res = await MongoDb.save(ctx.request.body)
+  .post('/', async (ctx, next) => {
+    let res = await MongoDb.save(ctx.request.body.long_url)
     ctx.body = res
   });
 

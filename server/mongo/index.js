@@ -42,20 +42,39 @@ class Mongodb {
 
   // 添加
   async save(body) {
-    let isHas = await query(body.short_url)
-    if (isHas) {
-      return {
-        status: 0,
-        msg: '已存在'
-      }
+    // 随机生成3-6位
+    let str = await this.randomUrl(false, 3, 6)
+    let isHas = await this.query(str)
+    if (isHas.status) {
+     this.save(body)
     } else {
-      const m = new shortUrl(body)
+      let data = {
+        long_url: body,
+        short_url: str,
+      }
+      const m = new shortUrl(data)
       let res = await m.save()
       return {
         status: 1,
         msg: res
       }
     }
+  }
+
+  async randomUrl (randomFlag, min, max) {
+    let str = '',
+        range = min,
+        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+ 
+    // 随机产生
+    if(randomFlag){
+        range = Math.round(Math.random() * (max-min)) + min;
+    }
+    for(let i=0; i<range; i++){
+        let pos = Math.round(Math.random() * (arr.length-1));
+        str += arr[pos];
+    }
+    return str;
   }
 }
 module.exports = new Mongodb()
