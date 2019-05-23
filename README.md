@@ -2,13 +2,14 @@
 to short url with nodejs
 
 #### 数据库设置
-url
-shorturl:索引
-createtime
-dele: 是否删除
+short_url: String 短链接后缀字段
+long_url: String 原始长链接
+createtime： date
+dele: Boolean 是否删除
 
-#### 64位，取长度6，约580亿组合，对于自己够用了，重合度也会小很多
-0-9a-zA-Z
+#### 64位，取长度3-6随机，约580亿组合，对于自己够用了，重合度也会小很多
+0-9a-zA-Z共64位
+随机生成3-6长度字段
 
 #### koa，post/get（302）
 
