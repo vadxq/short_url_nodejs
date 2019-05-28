@@ -31,15 +31,20 @@ class Mongodb {
       {
       long_url: 1,
       short_url: 1,
-      date: 1
+      date: 1,
+      views: 1
     });
     if (res) {
+      if (!res.views) {
+        res.views = 0
+      }
       await shortUrl.findOneAndUpdate({short_url: body},
         {$set:
           {
             views: res.views += 1
           }
-        }
+        },
+        {useFindAndModify: false}
       )
       return {
         status: 1,

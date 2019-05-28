@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 import { dbPath } from '../config/sec';
 // const dbPath = 'mongodb://localhost:27017/short_url'
+const opts = { useNewUrlParser: true, useFindAndModify: false };
 
-mongoose.connect(dbPath)
+mongoose.connect(dbPath, opts)
 
 mongoose.connection.on('connected', () => {
    console.log('Mongoose connection open to '+dbPath);
