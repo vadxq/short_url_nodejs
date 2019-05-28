@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 const shortUrlSchema = new Schema({
   long_url: String,
   short_url: String,
+  views:  // 访问量
+  {
+    type: Number,
+    default: 0
+  },
   date: { // 创建时间
     type: Date,
     default: Date.now()
@@ -22,12 +27,20 @@ class Mongodb {
   }
   // 查询
   async query(body) {
-    let res = await shortUrl.findOne({ short_url: body, dele: false }, {
+    let res = await shortUrl.findOne({ short_url: body, dele: false },
+      {
       long_url: 1,
       short_url: 1,
       date: 1
     });
     if (res) {
+      await shortUrl.findOneAndUpdate({short_url: body},
+        {$set:
+          {
+            views: res.views += 1
+          }
+        }
+      )
       return {
         status: 1,
         msg: res
